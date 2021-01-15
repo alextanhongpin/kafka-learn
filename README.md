@@ -24,6 +24,25 @@ Test the connection:
 $ nc -vz localhost:9092
 ```
 
+## Connecting to Kafka from non-docker
+
+Configure the following environment variables for kafka (e.g. docker-compose):
+```yml
+    environment:
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=CLIENT:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - KAFKA_LISTENERS=CLIENT://:9092,EXTERNAL://:9093
+      - KAFKA_ADVERTISED_LISTENERS=CLIENT://kafka:9092,EXTERNAL://localhost:9093
+      - KAFKA_INTER_BROKER_LISTENER_NAME=CLIENT
+```
+
+Reference to the [configuration](https://docs.confluent.io/platform/current/kafka/multi-node.html).
+
+## Other tools
+
+- kafkacat
+
 ## References
 
 https://semaphoreci.com/community/tutorials/writing-and-testing-an-event-sourcing-microservice-with-kafka-and-go

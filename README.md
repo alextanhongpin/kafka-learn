@@ -10,6 +10,7 @@ Example of running kafka with golang.
 - [ ] comparison against NATS, RabbitMQ
 - [ ] production-scale integration
 
+
 ```bash
 $ go get gopkg.in/Shopify/sarama.v1
 ```
@@ -23,6 +24,10 @@ Test the connection:
 ```bash
 $ nc -vz localhost:9092
 ```
+
+## Best practices
+
+- always set `auto.commit.enable` to `false`. We need the `at least once` guaranty, not the `at most once`. Therefore we need to commit the offsets manually. 
 
 ## Connecting to Kafka from non-docker
 
@@ -38,6 +43,12 @@ Configure the following environment variables for kafka (e.g. docker-compose):
 ```
 
 Reference to the [configuration](https://docs.confluent.io/platform/current/kafka/multi-node.html).
+
+## Kafka vs Message Queue
+
+Kafka's model is __dumb broker, smart consumer__. Kafka is more suitable for publishing events (implementing Event Notification). However, the client needs to implement their own mechanism to ensure that the same message is not processed twice, e.g. by storing the last consumed offset, or by caching the id of the message that has been successfully processed.
+
+Message queue's model is __smart broker, dumb consumer__. Message queue is more suitable for publishing commands, because we can acknowledge the message (commands) that are processed successfully, or retrying failed operations.
 
 ## Other tools
 

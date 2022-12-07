@@ -56,4 +56,7 @@ Message queue's model is __smart broker, dumb consumer__. Message queue is more 
 
 ## References
 
-https://semaphoreci.com/community/tutorials/writing-and-testing-an-event-sourcing-microservice-with-kafka-and-go
+- https://semaphoreci.com/community/tutorials/writing-and-testing-an-event-sourcing-microservice-with-kafka-and-go
+- https://medium.com/event-driven-utopia/understanding-kafka-topic-partitions-ae40f80552e8
+- https://medium.com/fintechexplained/12-best-practices-for-using-kafka-in-your-architecture-a9d215e222e3
+- https://aiven.io/blog/tips-for-designing-payloads
